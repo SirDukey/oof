@@ -1,0 +1,92 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<p>
+	<div class="container">
+
+
+		{% with messages = get_flashed_messages(with_categories=true) %}
+			{% if messages %}
+				<ul class="flashes">
+				{% for category, message in messages %}
+					<li class="{{ category }}">{{ message }}</li>
+				{% endfor %}
+				</ul>
+			{% endif %}
+        {% endwith %}
+
+
+	    <form method="post">
+
+			<div class="form-group">
+						<p><label>auto: </label>
+				<input type="checkbox" name="auto_checkbox"/></p>
+			</div>
+
+
+			<div class="form-group">
+				<p><label>start: </label>
+					<input type="date" name="start"/><input type="time" name="start_time"/></p>
+			</div>
+
+			<div class="form-group">
+				<p><label>stop: </label>
+					<input type="date" name="stop"/><input type="time" name="stop_time"/></p>
+			</div>
+
+			<div class="form-group">
+					<p><label>subject: </label>
+				<input class="form-control" type="text" name="subject" value="{% for msg in select_subject %}{{ msg[0][0] }}{% endfor %}"/></p>
+			</div>
+			<div class="form-group">
+					<p><label>message: </label>
+				<textarea class="form-control" name="message" rows="10">{% for msg in select_text %}{{ msg[0][0] }}{% endfor %}</textarea></p>
+			</div>
+
+				<p><input class="btn btn-primary" type="submit" value="submit"/></p>
+
+	    </form>
+    </div>
+
+	<br>
+	<br>
+	<br>
+
+     <div class="container">
+		 {% for row in select_name %}
+		     {% for i in range(row|length)%}
+				 <table class="table table-striped">
+					 <tr>
+						<td><strong>name</strong></td>
+						<td><strong>email</strong></td>
+						<td><strong>autoresponder</strong></td>
+						<td><strong>start</strong></td>
+						<td><strong>end</strong></td>
+					 </tr>
+					 <tr>
+							{% for n in range(1, 6) %}
+								<td height="30%">{{ row[i][n] }}</td>
+							{% endfor %}
+					 </tr>
+				 </table>
+		         <div class="jumbotron">
+					 {% for n in range(7, 8) %}
+					     <strong>Subject:</strong> {{ row[i][n] }}<br>
+					 {% endfor %}
+                     <br>
+
+					 {% for n in range(6, 7) %}
+						 {{ row[i][n] }}<br>
+					 {% endfor %}
+				 </div>
+		     {% endfor %}
+		 {% endfor %}
+
+	 </div>
+
+
+
+</p>
+
+{% endblock %}

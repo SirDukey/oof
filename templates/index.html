@@ -1,0 +1,73 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<p>
+  <div style="background:transparent !important" class="jumbotron text-center">
+    <h1>Novus Group</h1>
+       <div class="lead">We're a South African company specialising in providing News Monitoring, Media Monitoring and Analysis Services.</div>
+       <img src="http://novusonlinenews.co.za/backend/web/assets/img/33.png" height="200px">
+  </div>
+
+</p>
+
+        <p>
+
+        <div class="container col-md-4">
+
+	    <form method="post">
+
+		<div class="form-group">
+	            <p><label>account: </label> 
+                        <select name="nameList">
+	                {% for row in select_all() %}
+		            {% for i in range(row|length)%}
+	                        <option value="{{ row[i][1] }}">{{ row[i][1] }}</option>
+		            {% endfor %}
+		        {% endfor %}
+	            </select>
+	<input class="btn btn-primary" type="submit" value="edit"/>
+
+		</p>
+		</div>
+
+
+
+
+	    </form>
+        </div>	
+	
+	<br>
+	<br>
+	<br>
+
+        <div class="container-fluid">
+	    <table class="table table-striped">
+	        <tr>
+		    <td><strong>name</strong></td>
+		    <td><strong>email</strong></td>
+		    <td><strong>autoresponder</strong></td>
+		    <td><strong>start</strong></td>
+		    <td><strong>end</strong></td>
+		    <td><strong>message</strong></td>
+		    <td><strong>subject</strong></td>
+	        </tr>
+
+	        {% for row in select_all() %}
+	    
+		    {% for i in range(row|length)%}
+		        <tr>
+		            {% for n in range(1,8) %}
+		                <td height="30%">{{ row[i][n] }}</td>
+		            {% endfor %}
+	    	        </tr>
+		    {% endfor %}
+
+	        {% endfor %}
+	    </table>
+        </div>
+
+
+
+        </p>
+
+{% endblock %}
